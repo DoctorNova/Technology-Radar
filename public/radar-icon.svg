@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600.5 521.43">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: #fff;
+        stroke-width: 10px;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <title>radarElement 1</title>
+  <g id="Ebene_2" data-name="Ebene 2">
+    <g id="Ebene_1-2" data-name="Ebene 1">
+      <path class="cls-1" d="M507.25,468.78v29h-414v-29c0-.67,0-1.34,0-2,.77-20.61,13.44-37,28.95-37h356c15.51,0,28.18,16.39,28.95,37C507.24,467.44,507.25,468.11,507.25,468.78Z"/>
+      <rect class="cls-2" x="0.5" y="496.63" width="599.5" height="24.29" rx="7.19" ry="7.19"/>
+      <polygon class="cls-1" points="383.75 430.9 383.12 431.78 334.28 499.78 266.22 499.78 217.38 431.78 216.75 430.9 248.64 242.78 351.86 242.78 383.75 430.9"/>
+      <g>
+        <path class="cls-1" d="M438.25,122.51c0,111.71-90.56,202.27-202.27,202.27A202.08,202.08,0,0,1,65.88,232L402,6.88A201.35,201.35,0,0,1,438.25,122.51Z"/>
+        <polygon class="cls-1" points="178.36 28.5 202.6 138.67 269.93 94.37 178.36 28.5"/>
+        <circle class="cls-3" cx="171.09" cy="18.37" r="10.16"/>
+      </g>
+    </g>
+  </g>
+</svg>
