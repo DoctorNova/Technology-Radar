@@ -1,15 +1,27 @@
 import './App.css';
 import TechnologyRadar from './TechnologyRadar';
-import queryString from 'query-string';
 
 function App() {
-  const params = queryString.parse(window.location.search);
-  const entries = params.entries ? JSON.parse(params.entries) : undefined;
-  const rings = params.rings ? JSON.parse(params.rings) : undefined;
-
+  const entries = [{
+    label: "1. JavaScript",
+    ring: "Adopt",
+    segment: "Languages & Frameworks",
+    isNew: true,
+    moved: 1
+  }, {
+    label: "2. Java",
+    ring: "Hold",
+    segment: "Languages & Frameworks",
+    isNew: false,
+    moved: -1
+  }, {
+    label: "1. Python",
+    ring: "Adopt",
+    segment: "Languages & Frameworks",
+  }]
   return (
     <div className="App">
-      <TechnologyRadar entries={entries} rings={rings} />
+      <TechnologyRadar entries={entries} />
     </div>
   );
 }
