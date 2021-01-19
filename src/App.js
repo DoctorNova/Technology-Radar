@@ -1,5 +1,5 @@
 import './App.css';
-import TechnologyRadar from './TechnologyRadar';
+import TechnologyRadar from './components/TechnologyRadar';
 
 function App() {
   const entries = [{
