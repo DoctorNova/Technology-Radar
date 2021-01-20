@@ -93,7 +93,7 @@ const Ring = ({ offset, ring, segment }) => {
 
   return (
     <g className={getClassName(ring)} key={ring.label}>
-      <path fill={ring.color} stroke={ring.stroke} d={ringD}>
+      <path fill={ring.color} d={ringD}>
         <title>{ring.label}</title>
       </path>
       <RingLabel offset={offset} ring={ring} segment={segment} />
