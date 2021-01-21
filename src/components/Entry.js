@@ -19,8 +19,6 @@ const Entries = ({ offset, ring, segment, entryRadius }) => {
   const availableRadian = segment.radian / ring.entries.length;
   const radianGenerator = randomNumberFactory(0, availableRadian);
 
-  if (ring.entries.length && ring.radius === 250) debugger;
-
   return ring.entries.map((entry, index) => {
     const radius = radiusGenerator.next().value;
     const radian =
@@ -30,16 +28,11 @@ const Entries = ({ offset, ring, segment, entryRadius }) => {
     const point = getCartesianCoordinates(radius, radian, offset);
 
     return (
-      <g key={entry.label + coordinatesToString(point)} className="entry">
-        <animateTransform
-          attributeName="transform"
-          attributeType="XML"
-          type="translate"
-          from={offset.x + " " + offset.y}
-          to={point.x + " " + point.y}
-          dur="0.5s"
-          fill="freeze"
-        />
+      <g
+        key={entry.label + coordinatesToString(point)}
+        className="entry"
+        transform={`translate(${point.x} ${point.y})`}
+      >
         <EntryShape
           {...{
             ...entry,

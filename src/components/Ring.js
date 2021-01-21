@@ -1,82 +1,7 @@
-import {
-  coordinatesToString,
-  getCartesianCoordinates,
-  getClassName,
-  FULL_CIRCLE,
-} from "./utility";
+import { coordinatesToString, getClassName, CurvedText } from "./utility";
 import PropTypes from "prop-types";
 import Entries from "./Entry";
-
-const getBezierCurveControlPointsConfig = (numberOfSegments, radius) => {
-  // source: https://stackoverflow.com/questions/1734745
-  // Each segment has a start and end point. For each point we need a control point to make it form a circle.
-  // So we devide PI by the number of segment multiplied by two.
-  // The magic number 1.317 is more accurate than the 4/3 from the stackoverlow question
-  const bezierCurveOffsetFactor =
-    1.317 * Math.tan(Math.PI / (numberOfSegments * 2));
-  const controlPointOffset = bezierCurveOffsetFactor * radius;
-
-  /**
-   *
-   *        bezierCurveOffset
-   *   point ______________ controlPoint
-   *         |            /
-   *         |           /
-   *         |          /
-   *         |         /
-   *         |        /
-   *         |       /
-   *  radius |      / controlPointRadius
-   *         |–––––/
-   *         |    /
-   *         | * /
-   *         |  /
-   *         | /    * = controlPointRadian
-   *         |/
-   *
-   */
-  const controlPointRadius = Math.sqrt(controlPointOffset ** 2 + radius ** 2);
-  const controlPointRadian = Math.tan(controlPointOffset / controlPointRadius);
-
-  return {
-    radius: controlPointRadius,
-    radian: controlPointRadian,
-  };
-};
-
-const getBezierCurvePoints = (offset, radius, radianToStart, radianToEnd) => {
-  const numberOfSegments = FULL_CIRCLE / (radianToEnd - radianToStart);
-  const controlPointsConfig = getBezierCurveControlPointsConfig(
-    numberOfSegments,
-    radius
-  );
-
-  const startPoint = getCartesianCoordinates(radius, radianToStart, offset);
-  const startPointCurve = getCartesianCoordinates(
-    controlPointsConfig.radius,
-    controlPointsConfig.radian + radianToStart,
-    offset
-  );
-
-  const endPoint = getCartesianCoordinates(radius, radianToEnd, offset);
-  const endPointCurve = getCartesianCoordinates(
-    controlPointsConfig.radius,
-    radianToEnd - controlPointsConfig.radian,
-    offset
-  );
-
-  return [startPoint, startPointCurve, endPointCurve, endPoint];
-};
-
-const drawBezierCurvePoints = (points) =>
-  [
-    "M",
-    coordinatesToString(points[0]),
-    "C",
-    coordinatesToString(points[1]),
-    coordinatesToString(points[2]),
-    coordinatesToString(points[3]),
-  ].join(" ");
+import { getBezierCurvePoints, drawBezierCurvePoints } from "./bezierCurve";
 
 const Ring = ({ offset, ring, segment, entryRadius }) => {
   const bezierCurvePoints = getBezierCurvePoints(
@@ -98,7 +23,12 @@ const Ring = ({ offset, ring, segment, entryRadius }) => {
         <title>{ring.label}</title>
       </path>
       <RingLabel offset={offset} ring={ring} segment={segment} />
-      <Entries offset={offset} ring={ring} segment={segment} entryRadius={entryRadius}/>
+      <Entries
+        offset={offset}
+        ring={ring}
+        segment={segment}
+        entryRadius={entryRadius}
+      />
     </g>
   );
 };
@@ -144,29 +74,14 @@ Ring.propTypes = {
 };
 
 const RingLabel = ({ offset, ring, segment }) => {
-  const bezierCurvePoints = getBezierCurvePoints(
-    offset,
-    ring.radiusInTheCenter,
-    segment.radianToStart,
-    segment.radianToEnd
-  );
-
-  const id =
-    segment.label +
-    ring.label +
-    coordinatesToString(bezierCurvePoints[1]) +
-    coordinatesToString(bezierCurvePoints[3]);
-  const d = drawBezierCurvePoints(bezierCurvePoints);
-
   return (
-    <>
-      <path id={id} d={d} fill="transparent"></path>
-      <text>
-        <textPath xlinkHref={`#${id}`} textAnchor="middle" startOffset="50%">
-          {ring.label}
-        </textPath>
-      </text>
-    </>
+    <CurvedText
+      text={ring.label}
+      offset={offset}
+      radius={ring.radiusInTheCenter}
+      radianToStart={segment.radianToStart}
+      radianToEnd={segment.radianToEnd}
+    />
   );
 };
 

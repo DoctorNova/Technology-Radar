@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Ring from "./Ring";
-import Entries, { EntryShape } from "./Entry";
-import { getClassName } from "./utility";
+import { EntryShape } from "./Entry";
+import { CurvedText, getClassName } from "./utility";
 
 const DEFAULTS = {
   SEGMENT: {
@@ -75,6 +75,16 @@ const getRingConfig = (entries, ring, index, rings) => {
   };
 };
 
+const drawSegmentLabel = (segment) => {
+  const outerRing = segment.rings[segment.rings.length - 1];
+
+  if (outerRing) {
+    return (
+      <CurvedText fontColor={segment.color} text={segment.label} offset={TECHNOLOGY_RADAR} radius={outerRing.radius + 10} radianToStart={segment.radianToStart} radianToEnd={segment.radianToEnd} />
+    )
+  }
+}
+
 const TechnologyRadar = ({ entryRadius, entries, rings, segments }) => {
   const radar = segments
     .map(getSegmentConfig.bind(this, entries, rings))
@@ -93,6 +103,7 @@ const TechnologyRadar = ({ entryRadius, entries, rings, segments }) => {
           // Reverse the array to make the rings closer to the center
           // lie on top of the rings further away from the center.
           .reverse()}
+        {drawSegmentLabel(segment)}
       </g>
     ));
 

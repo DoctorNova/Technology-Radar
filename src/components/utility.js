@@ -1,4 +1,5 @@
 import seedrandom from "seedrandom";
+import {getBezierCurvePoints, drawBezierCurvePoints} from "./bezierCurve";
 
 export const getCartesianCoordinates = (radius, radian, offset = {x:0, y:0}) => {
     return {
@@ -20,3 +21,30 @@ export function* randomNumberFactory(min, max) {
     seed++;
   }
 }
+
+export const CurvedText = ({fontColor, text, offset, radius, radianToStart, radianToEnd }) => {
+  const bezierCurvePoints = getBezierCurvePoints(
+    offset,
+    radius,
+    radianToStart,
+    radianToEnd
+  );
+
+  const id =
+    text +
+    coordinatesToString(bezierCurvePoints[1]) +
+    coordinatesToString(bezierCurvePoints[3]);
+
+  const d = drawBezierCurvePoints(bezierCurvePoints);
+
+  return (
+    <>
+      <path id={id} d={d} fill="transparent"></path>
+      <text fill={fontColor}>
+        <textPath xlinkHref={`#${id}`} textAnchor="middle" startOffset="50%">
+          {text}
+        </textPath>
+      </text>
+    </>
+  );
+};
