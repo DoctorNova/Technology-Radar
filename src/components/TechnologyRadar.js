@@ -7,10 +7,10 @@ import { CurvedText, getClassName } from "./utility";
 const DEFAULTS = {
   SEGMENT: {
     fontColor: "#fff",
-    color: "#6011D9",
+    color: "#3DB5BE",
   },
   RING: {
-    color: "#6011D9",
+    color: "#CCCCCC",
   },
   ENTRY: {
     isNew: false,
@@ -90,6 +90,7 @@ const TechnologyRadar = ({ entryRadius, entries, rings, segments }) => {
     .map(getSegmentConfig.bind(this, entries, rings))
     .map((segment) => (
       <g className={getClassName(segment)} key={segment.label}>
+        {drawSegmentLabel(segment)}
         {segment.rings
           .map((ring) => (
             <Ring
@@ -103,12 +104,11 @@ const TechnologyRadar = ({ entryRadius, entries, rings, segments }) => {
           // Reverse the array to make the rings closer to the center
           // lie on top of the rings further away from the center.
           .reverse()}
-        {drawSegmentLabel(segment)}
       </g>
     ));
 
   return (
-    <svg viewBox="-5 -5 1010 1010" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="-20 -20 1040 1040" xmlns="http://www.w3.org/2000/svg">
       {radar}
     </svg>
   );

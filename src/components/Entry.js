@@ -9,22 +9,17 @@ const Entries = ({ offset, ring, segment, entryRadius }) => {
   const entryDiameter = entryRadius * 2;
   // If this is the ring in the center we don't want the point to be in the center
   const spaceRadius =
-    ring.space.radius === ring.radius ? ring.radius - 100 : ring.space.radius;
+    ring.space.radius === ring.radius ? ring.radius - 150 : ring.space.radius;
   // at leat one point away from last the ring
-  const minRadius = ring.radius - spaceRadius + entryDiameter;
+  const minRadius = ring.radius - spaceRadius + entryRadius;
   // at most one point from the end of the ring
-  const maxRadius = ring.radius - entryDiameter;
+  const maxRadius = ring.radius - entryRadius;
   const radiusGenerator = randomNumberFactory(minRadius, maxRadius);
-
   const availableRadian = segment.radian / ring.entries.length;
-  const radianGenerator = randomNumberFactory(0, availableRadian);
 
   return ring.entries.map((entry, index) => {
     const radius = radiusGenerator.next().value;
-    const radian =
-      radianGenerator.next().value +
-      availableRadian * index +
-      segment.radianToStart;
+    const radian = availableRadian * index + availableRadian / 2 + segment.radianToStart;
     const point = getCartesianCoordinates(radius, radian, offset);
 
     return (
