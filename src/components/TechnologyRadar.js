@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Ring from "./SegmentRing";
+import Ring from "./Ring";
+import Entries, { EntryShape } from "./Entry";
 import { getClassName } from "./utility";
 
 const DEFAULTS = {
@@ -9,7 +10,7 @@ const DEFAULTS = {
     color: "#6011D9",
   },
   RING: {
-    color: "#6011D9"
+    color: "#6011D9",
   },
   ENTRY: {
     isNew: false,
@@ -74,13 +75,21 @@ const getRingConfig = (entries, ring, index, rings) => {
   };
 };
 
-const TechnologyRadar = ({ entries, rings, segments }) => {
-  const radarSegments = segments
+const TechnologyRadar = ({ entryRadius, entries, rings, segments }) => {
+  const radar = segments
     .map(getSegmentConfig.bind(this, entries, rings))
     .map((segment) => (
       <g className={getClassName(segment)} key={segment.label}>
         {segment.rings
-          .map((ring) => <Ring offset={TECHNOLOGY_RADAR} ring={ring} segment={segment} />)
+          .map((ring) => (
+            <Ring
+              key={segment.label + ring.label}
+              offset={TECHNOLOGY_RADAR}
+              ring={ring}
+              segment={segment}
+              entryRadius={entryRadius}
+            />
+          ))
           // Reverse the array to make the rings closer to the center
           // lie on top of the rings further away from the center.
           .reverse()}
@@ -89,12 +98,13 @@ const TechnologyRadar = ({ entries, rings, segments }) => {
 
   return (
     <svg viewBox="-5 -5 1010 1010" xmlns="http://www.w3.org/2000/svg">
-      {radarSegments}
+      {radar}
     </svg>
   );
 };
 
 TechnologyRadar.propTypes = {
+  entryRadius: PropTypes.number,
   segments: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
@@ -113,20 +123,22 @@ TechnologyRadar.propTypes = {
   entries: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
+      title: PropTypes.string,
       ring: PropTypes.string.isRequired,
       segment: PropTypes.string.isRequired,
       isNew: PropTypes.bool,
-      moved: PropTypes.oneOf([1, 0, -1]),
+      moved: PropTypes.bool,
     })
   ).isRequired,
 };
 
 TechnologyRadar.defaultProps = {
+  entryRadius: 10,
   segments: [
-    { label: "Techniques", color: "#6011D9" },
-    { label: "Tools", color: "#F87937" },
-    { label: "Platforms", color: "#37D9F0" },
-    { label: "Languages & Frameworks", color: "#F03A27" },
+    { label: "Techniques", color: "#3DB5BE" },
+    { label: "Tools", color: "#83AD78" },
+    { label: "Platforms", color: "#E88744" },
+    { label: "Languages & Frameworks", color: "#8D2145" },
   ],
   rings: [
     { label: "Adopt", color: "#808080" },

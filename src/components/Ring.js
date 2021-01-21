@@ -5,6 +5,7 @@ import {
   FULL_CIRCLE,
 } from "./utility";
 import PropTypes from "prop-types";
+import Entries from "./Entry";
 
 const getBezierCurveControlPointsConfig = (numberOfSegments, radius) => {
   // source: https://stackoverflow.com/questions/1734745
@@ -50,18 +51,18 @@ const getBezierCurvePoints = (offset, radius, radianToStart, radianToEnd) => {
     radius
   );
 
-  const startPoint = getCartesianCoordinates(offset, radius, radianToStart);
+  const startPoint = getCartesianCoordinates(radius, radianToStart, offset);
   const startPointCurve = getCartesianCoordinates(
-    offset,
     controlPointsConfig.radius,
-    controlPointsConfig.radian + radianToStart
+    controlPointsConfig.radian + radianToStart,
+    offset
   );
 
-  const endPoint = getCartesianCoordinates(offset, radius, radianToEnd);
+  const endPoint = getCartesianCoordinates(radius, radianToEnd, offset);
   const endPointCurve = getCartesianCoordinates(
-    offset,
     controlPointsConfig.radius,
-    radianToEnd - controlPointsConfig.radian
+    radianToEnd - controlPointsConfig.radian,
+    offset
   );
 
   return [startPoint, startPointCurve, endPointCurve, endPoint];
@@ -77,7 +78,7 @@ const drawBezierCurvePoints = (points) =>
     coordinatesToString(points[3]),
   ].join(" ");
 
-const Ring = ({ offset, ring, segment }) => {
+const Ring = ({ offset, ring, segment, entryRadius }) => {
   const bezierCurvePoints = getBezierCurvePoints(
     offset,
     ring.radius,
@@ -97,6 +98,7 @@ const Ring = ({ offset, ring, segment }) => {
         <title>{ring.label}</title>
       </path>
       <RingLabel offset={offset} ring={ring} segment={segment} />
+      <Entries offset={offset} ring={ring} segment={segment} entryRadius={entryRadius}/>
     </g>
   );
 };
@@ -126,7 +128,7 @@ Ring.propTypes = {
     color: PropTypes.string,
     stroke: PropTypes.string,
     className: PropTypes.string,
-    space: PropTypes.number.isRequired,
+    space: PropTypes.shape({ radius: PropTypes.number.isRequired }).isRequired,
     radius: PropTypes.number.isRequired,
     radiusInTheCenter: PropTypes.number.isRequired,
     entries: PropTypes.arrayOf(
@@ -135,7 +137,7 @@ Ring.propTypes = {
         ring: PropTypes.string.isRequired,
         segment: PropTypes.string.isRequired,
         isNew: PropTypes.bool,
-        moved: PropTypes.oneOf([1, 0, -1]),
+        moved: PropTypes.bool,
       })
     ),
   }).isRequired,
@@ -193,7 +195,7 @@ RingLabel.propTypes = {
     color: PropTypes.string,
     stroke: PropTypes.string,
     className: PropTypes.string,
-    space: PropTypes.number.isRequired,
+    space: PropTypes.shape({ radius: PropTypes.number.isRequired }).isRequired,
     radius: PropTypes.number.isRequired,
     radiusInTheCenter: PropTypes.number.isRequired,
     entries: PropTypes.arrayOf(
@@ -202,7 +204,7 @@ RingLabel.propTypes = {
         ring: PropTypes.string.isRequired,
         segment: PropTypes.string.isRequired,
         isNew: PropTypes.bool,
-        moved: PropTypes.oneOf([1, 0, -1]),
+        moved: PropTypes.bool,
       })
     ),
   }).isRequired,

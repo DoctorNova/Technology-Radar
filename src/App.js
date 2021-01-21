@@ -3,19 +3,22 @@ import TechnologyRadar from './components/TechnologyRadar';
 
 function App() {
   const entries = [{
-    label: "1. JavaScript",
+    label: "1",
+    title: "JavaScript",
     ring: "Adopt",
     segment: "Languages & Frameworks",
     isNew: true,
-    moved: 1
+    moved: true
   }, {
-    label: "2. Java",
+    label: "2",
+    title: "Java",
     ring: "Hold",
     segment: "Languages & Frameworks",
     isNew: false,
-    moved: -1
+    moved: true
   }, {
-    label: "1. Python",
+    label: "3",
+    title: "Python",
     ring: "Adopt",
     segment: "Languages & Frameworks",
   }]
