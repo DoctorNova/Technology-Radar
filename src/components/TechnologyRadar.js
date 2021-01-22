@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Ring from "./Ring";
 import { EntryShape } from "./Entry";
-import { CurvedText, getClassName } from "./utility";
+import { CurvedText, getClassName, radianToDegrees } from "./utility";
 
 const DEFAULTS = {
   SEGMENT: {
@@ -31,6 +31,27 @@ const TECHNOLOGY_RADAR = (() => {
   });
 })();
 
+const onMouseEnterEntry = (onMouseEnter, entry, event) => {
+  event.currentTarget
+    .closest(".segment")
+    .querySelectorAll(".entry")
+    .forEach((node) => node.setAttribute("opacity", "0.2"));
+  event.currentTarget.setAttribute("opacity", "1");
+  if (typeof onMouseEnter === "function") {
+    onMouseEnter(entry, event);
+  }
+};
+
+const onMouseLeaveEntry = (onMouseLeave, entry, event) => {
+  event.currentTarget
+    .closest(".segment")
+    .querySelectorAll(".entry")
+    .forEach((node) => node.setAttribute("opacity", "1"));
+  if (typeof onMouseLeave === "function") {
+    onMouseLeave(entry, event);
+  }
+};
+
 const getSegmentConfig = (entries, rings, segment, index, segments) => {
   // divide the radian of the technology radar by the number of segments to get the radian each segment has
   const radian = TECHNOLOGY_RADAR.radian / segments.length;
@@ -40,6 +61,11 @@ const getSegmentConfig = (entries, rings, segment, index, segments) => {
   const radianToStart = radianToEnd - radian;
 
   const filterBySegment = (entry) => entry.segment === segment.label;
+  const entriesConfig = entries.filter(filterBySegment).map((e) => ({
+    ...e,
+    onMouseEnter: onMouseEnterEntry.bind(this, e.onMouseEnter),
+    onMouseLeave: onMouseLeaveEntry.bind(this, e.onMouseLeave),
+  }));
 
   return {
     ...DEFAULTS.SEGMENT,
@@ -47,7 +73,7 @@ const getSegmentConfig = (entries, rings, segment, index, segments) => {
     radian,
     radianToEnd,
     radianToStart,
-    rings: rings.map(getRingConfig.bind(this, entries.filter(filterBySegment))),
+    rings: rings.map(getRingConfig.bind(this, entriesConfig)),
   };
 };
 
@@ -93,22 +119,81 @@ const drawSegmentLabel = (segment) => {
 };
 
 const Description = ({ entryRadius, description }) => {
-  const descriptions = [description.normal, description.isNew, description.moved];
+  const descriptions = [
+    description.normal,
+    description.isNew,
+    description.moved,
+  ];
 
   return (
     <g className="description">
-      {descriptions.map(
-        (label, index) => (
-          <g transform={`translate(0, ${(entryRadius * 2 + 10) * index})`} fill={description.color}>
-            <EntryShape
-              radius={entryRadius}
-              isNew={index === 1}
-              moved={index === 2}
-            />
-            <text y={entryRadius / 2} x={entryRadius * 2 + 5}>{label}</text>
-          </g>
-        )
-      )}
+      {descriptions.map((label, index) => (
+        <g
+          key={label}
+          transform={`translate(0, ${(entryRadius * 2 + 10) * index})`}
+          fill={description.color}
+        >
+          <EntryShape
+            radius={entryRadius}
+            isNew={index === 1}
+            moved={index === 2}
+          />
+          <text y={entryRadius / 2} x={entryRadius * 2 + 5}>
+            {label}
+          </text>
+        </g>
+      ))}
+    </g>
+  );
+};
+
+const Segment = ({ segment, entryRadius }) => {
+  const onMouseEnter = (event) => {
+    event.currentTarget
+      .closest("svg")
+      .querySelectorAll(".segment")
+      .forEach((node) => node.setAttribute("opacity", "0.8"));
+    event.currentTarget.setAttribute("opacity", "1");
+    if (typeof segment.onMouseEnter === "function") {
+      segment.onMouseEnter(segment, event);
+    }
+  };
+
+  const onMouseLeave = (event) => {
+    event.currentTarget
+      .closest("svg")
+      .querySelectorAll(".segment")
+      .forEach((node) => node.setAttribute("opacity", "1"));
+    if (typeof segment.onMouseLeave === "function") {
+      segment.onMouseLeave(segment, event);
+    }
+  };
+
+  return (
+    <g
+      className={getClassName(segment, "segment")}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={
+        typeof segment.onClick === "function"
+          ? segment.onClick.bind(this, segment)
+          : undefined
+      }
+    >
+      {drawSegmentLabel(segment)}
+      {segment.rings
+        .map((ring) => (
+          <Ring
+            key={segment.label + ring.label}
+            offset={TECHNOLOGY_RADAR}
+            ring={ring}
+            segment={segment}
+            entryRadius={entryRadius}
+          />
+        ))
+        // Reverse the array to make the rings closer to the center
+        // lie on top of the rings further away from the center.
+        .reverse()}
     </g>
   );
 };
@@ -122,24 +207,7 @@ const TechnologyRadar = ({
 }) => {
   const radar = segments
     .map(getSegmentConfig.bind(this, entries, rings))
-    .map((segment) => (
-      <g className={getClassName(segment)} key={segment.label}>
-        {drawSegmentLabel(segment)}
-        {segment.rings
-          .map((ring) => (
-            <Ring
-              key={segment.label + ring.label}
-              offset={TECHNOLOGY_RADAR}
-              ring={ring}
-              segment={segment}
-              entryRadius={entryRadius}
-            />
-          ))
-          // Reverse the array to make the rings closer to the center
-          // lie on top of the rings further away from the center.
-          .reverse()}
-      </g>
-    ));
+    .map((segment) => <Segment key={segment.label} segment={segment} entryRadius={entryRadius} />);
 
   return (
     <svg viewBox="-20 -20 1040 1040" xmlns="http://www.w3.org/2000/svg">
@@ -156,6 +224,9 @@ TechnologyRadar.propTypes = {
       label: PropTypes.string.isRequired,
       color: PropTypes.string.isRequired,
       className: PropTypes.string,
+      onMouseEnter: PropTypes.func,
+      onMouseLeave: PropTypes.func,
+      onClick: PropTypes.func
     })
   ),
   rings: PropTypes.arrayOf(
@@ -174,6 +245,9 @@ TechnologyRadar.propTypes = {
       segment: PropTypes.string.isRequired,
       isNew: PropTypes.bool,
       moved: PropTypes.bool,
+      onMouseLeave: PropTypes.func,
+      onMouseEnter: PropTypes.func,
+      onClick: PropTypes.func,
     })
   ).isRequired,
   description: PropTypes.shape({

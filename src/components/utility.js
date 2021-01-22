@@ -1,6 +1,8 @@
 import seedrandom from "seedrandom";
 import { getBezierCurvePoints, drawBezierCurvePoints } from "./bezierCurve";
 
+export const radianToDegrees = (rad) => rad * 180 / Math.PI;
+
 export const getCartesianCoordinates = (
   radius,
   radian,
@@ -14,7 +16,14 @@ export const getCartesianCoordinates = (
 
 export const coordinatesToString = (point) => point.x + "," + point.y;
 
-export const getClassName = (o) => ((o.className ?? "") + " " + o.label).trim();
+export const getClassName = (o, className = "") =>
+  (
+    (o.className ?? "") +
+    " " +
+    className +
+    " " +
+    o.label.replace(/\s/g, "-")
+  ).trim();
 
 export const FULL_CIRCLE = 2 * Math.PI;
 

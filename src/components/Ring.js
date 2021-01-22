@@ -18,7 +18,7 @@ const Ring = ({ offset, ring, segment, entryRadius }) => {
     " Z ";
 
   return (
-    <g className={getClassName(ring)} key={ring.label}>
+    <g className={getClassName(ring, "ring")} key={ring.label}>
       <title>{ring.label}</title>
       <path fill={ring.color} d={ringD} />
       <RingLabel offset={offset} ring={ring} segment={segment} />
@@ -67,6 +67,9 @@ Ring.propTypes = {
         segment: PropTypes.string.isRequired,
         isNew: PropTypes.bool,
         moved: PropTypes.bool,
+        onMouseEnter: PropTypes.func,
+        onMouseLeave: PropTypes.func,
+        onClick: PropTypes.func
       })
     ),
   }).isRequired,

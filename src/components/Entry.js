@@ -6,7 +6,6 @@ import {
 import PropTypes from "prop-types";
 
 const Entries = ({ offset, ring, segment, entryRadius }) => {
-  const entryDiameter = entryRadius * 2;
   // If this is the ring in the center we don't want the point to be in the center
   const spaceRadius =
     ring.space.radius === ring.radius ? ring.radius - 150 : ring.space.radius;
@@ -19,14 +18,22 @@ const Entries = ({ offset, ring, segment, entryRadius }) => {
 
   return ring.entries.map((entry, index) => {
     const radius = radiusGenerator.next().value;
-    const radian = availableRadian * index + availableRadian / 2 + segment.radianToStart;
+    const radian =
+      availableRadian * index + availableRadian / 2 + segment.radianToStart;
     const point = getCartesianCoordinates(radius, radian, offset);
+    const bindEntryToFunc = (callback) => typeof callback === "function" ? callback.bind(this, entry) : undefined;
 
     return (
       <g
         key={entry.label + coordinatesToString(point)}
         className="entry"
         transform={`translate(${point.x} ${point.y})`}
+        onMouseEnter={bindEntryToFunc(entry.onMouseEnter)}
+        onMouseLeave={bindEntryToFunc(entry.onMouseLeave)}
+        onClick={bindEntryToFunc(entry.onClick)}
+        style={{
+          cursor: typeof entry.onClick === "function" ? "pointer" : "default",
+        }}
       >
         <EntryShape
           {...{
@@ -71,6 +78,9 @@ Entries.propTypes = {
         title: PropTypes.string,
         moved: PropTypes.bool,
         isNew: PropTypes.bool,
+        onMouseEnter: PropTypes.func,
+        onMouseLeave: PropTypes.func,
+        onClick: PropTypes.func,
       })
     ),
   }).isRequired,
@@ -126,7 +136,7 @@ const EntryShape = ({ color, radius, moved, isNew }) => {
 };
 
 EntryShape.propTypes = {
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   radius: PropTypes.number.isRequired,
   moved: PropTypes.bool,
   isNew: PropTypes.bool,
