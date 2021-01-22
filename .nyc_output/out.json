@@ -1158,19 +1158,19 @@
       "12": 2,
       "13": 2,
       "14": 2,
-      "15": 122,
-      "16": 0,
-      "17": 0,
-      "18": 122,
-      "19": 0,
-      "20": 0,
-      "21": 122,
+      "15": 128,
+      "16": 2,
+      "17": 2,
+      "18": 128,
+      "19": 2,
+      "20": 2,
+      "21": 128,
       "22": 2
     },
     "f": {
       "0": 40,
       "1": 122,
-      "2": 122
+      "2": 128
     },
     "b": {
       "0": [
@@ -1182,16 +1182,16 @@
         0
       ],
       "2": [
-        0,
-        122
+        2,
+        126
       ],
       "3": [
-        0,
-        122
+        2,
+        126
       ],
       "4": [
         0,
-        0
+        2
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
@@ -1601,7 +1601,7 @@
           "column": 25
         },
         "end": {
-          "line": 86,
+          "line": 93,
           "column": 1
         }
       },
@@ -1621,7 +1621,7 @@
           "column": 2
         },
         "end": {
-          "line": 85,
+          "line": 92,
           "column": 3
         }
       },
@@ -1631,77 +1631,117 @@
           "column": 4
         },
         "end": {
-          "line": 84,
-          "column": 5
+          "line": 91,
+          "column": 6
         }
       },
       "26": {
         "start": {
-          "line": 88,
-          "column": 24
+          "line": 95,
+          "column": 20
         },
         "end": {
-          "line": 115,
+          "line": 114,
           "column": 1
         }
       },
       "27": {
         "start": {
-          "line": 89,
-          "column": 16
+          "line": 96,
+          "column": 23
         },
         "end": {
-          "line": 108,
-          "column": 6
+          "line": 96,
+          "column": 81
         }
       },
       "28": {
         "start": {
-          "line": 92,
-          "column": 6
+          "line": 98,
+          "column": 2
         },
         "end": {
-          "line": 107,
-          "column": 10
+          "line": 113,
+          "column": 4
         }
       },
       "29": {
         "start": {
-          "line": 96,
-          "column": 12
+          "line": 102,
+          "column": 10
         },
         "end": {
-          "line": 102,
+          "line": 109,
           "column": 14
         }
       },
       "30": {
         "start": {
-          "line": 110,
-          "column": 2
+          "line": 116,
+          "column": 24
         },
         "end": {
-          "line": 114,
-          "column": 4
+          "line": 150,
+          "column": 1
         }
       },
       "31": {
         "start": {
-          "line": 117,
-          "column": 0
+          "line": 123,
+          "column": 16
         },
         "end": {
-          "line": 144,
-          "column": 2
+          "line": 142,
+          "column": 6
         }
       },
       "32": {
         "start": {
-          "line": 146,
+          "line": 126,
+          "column": 6
+        },
+        "end": {
+          "line": 141,
+          "column": 10
+        }
+      },
+      "33": {
+        "start": {
+          "line": 130,
+          "column": 12
+        },
+        "end": {
+          "line": 136,
+          "column": 14
+        }
+      },
+      "34": {
+        "start": {
+          "line": 144,
+          "column": 2
+        },
+        "end": {
+          "line": 149,
+          "column": 4
+        }
+      },
+      "35": {
+        "start": {
+          "line": 152,
           "column": 0
         },
         "end": {
-          "line": 160,
+          "line": 185,
+          "column": 2
+        }
+      },
+      "36": {
+        "start": {
+          "line": 187,
+          "column": 0
+        },
+        "end": {
+          "line": 207,
           "column": 2
         }
       }
@@ -1845,7 +1885,7 @@
             "column": 38
           },
           "end": {
-            "line": 86,
+            "line": 93,
             "column": 1
           }
         },
@@ -1855,73 +1895,121 @@
         "name": "(anonymous_6)",
         "decl": {
           "start": {
-            "line": 88,
-            "column": 24
+            "line": 95,
+            "column": 20
           },
           "end": {
-            "line": 88,
-            "column": 25
+            "line": 95,
+            "column": 21
           }
         },
         "loc": {
           "start": {
-            "line": 88,
-            "column": 71
+            "line": 95,
+            "column": 54
           },
           "end": {
-            "line": 115,
+            "line": 114,
             "column": 1
           }
         },
-        "line": 88
+        "line": 95
       },
       "7": {
         "name": "(anonymous_7)",
         "decl": {
           "start": {
-            "line": 91,
-            "column": 9
+            "line": 101,
+            "column": 8
           },
           "end": {
-            "line": 91,
-            "column": 10
+            "line": 101,
+            "column": 9
           }
         },
         "loc": {
           "start": {
-            "line": 92,
-            "column": 6
+            "line": 102,
+            "column": 10
           },
           "end": {
-            "line": 107,
-            "column": 10
+            "line": 109,
+            "column": 14
           }
         },
-        "line": 92
+        "line": 102
       },
       "8": {
         "name": "(anonymous_8)",
         "decl": {
           "start": {
-            "line": 95,
+            "line": 116,
+            "column": 24
+          },
+          "end": {
+            "line": 116,
+            "column": 25
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 122,
+            "column": 6
+          },
+          "end": {
+            "line": 150,
+            "column": 1
+          }
+        },
+        "line": 122
+      },
+      "9": {
+        "name": "(anonymous_9)",
+        "decl": {
+          "start": {
+            "line": 125,
+            "column": 9
+          },
+          "end": {
+            "line": 125,
+            "column": 10
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 126,
+            "column": 6
+          },
+          "end": {
+            "line": 141,
+            "column": 10
+          }
+        },
+        "line": 126
+      },
+      "10": {
+        "name": "(anonymous_10)",
+        "decl": {
+          "start": {
+            "line": 129,
             "column": 15
           },
           "end": {
-            "line": 95,
+            "line": 129,
             "column": 16
           }
         },
         "loc": {
           "start": {
-            "line": 96,
+            "line": 130,
             "column": 12
           },
           "end": {
-            "line": 102,
+            "line": 136,
             "column": 14
           }
         },
-        "line": 96
+        "line": 130
       }
     },
     "branchMap": {
@@ -1932,7 +2020,7 @@
             "column": 2
           },
           "end": {
-            "line": 85,
+            "line": 92,
             "column": 3
           }
         },
@@ -1944,7 +2032,7 @@
               "column": 2
             },
             "end": {
-              "line": 85,
+              "line": 92,
               "column": 3
             }
           },
@@ -1954,7 +2042,7 @@
               "column": 2
             },
             "end": {
-              "line": 85,
+              "line": 92,
               "column": 3
             }
           }
@@ -1991,11 +2079,15 @@
       "25": 10,
       "26": 2,
       "27": 2,
-      "28": 10,
-      "29": 40,
+      "28": 2,
+      "29": 6,
       "30": 2,
       "31": 2,
-      "32": 2
+      "32": 10,
+      "33": 40,
+      "34": 2,
+      "35": 2,
+      "36": 2
     },
     "f": {
       "0": 2,
@@ -2005,8 +2097,10 @@
       "4": 488,
       "5": 10,
       "6": 2,
-      "7": 10,
-      "8": 40
+      "7": 6,
+      "8": 2,
+      "9": 10,
+      "10": 40
     },
     "b": {
       "0": [
@@ -2015,7 +2109,7 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "365ddc039f63da05a8ad0b879404e19e42bb102f"
+    "hash": "12b4945fce5397e029ad7a41151411f720327dcc"
   },
   "/home/doctorbubble/Documents/Projects/technology-radar/src/components/TechnologyRadar.spec.js": {
     "path": "/home/doctorbubble/Documents/Projects/technology-radar/src/components/TechnologyRadar.spec.js",

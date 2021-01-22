@@ -80,12 +80,46 @@ const drawSegmentLabel = (segment) => {
 
   if (outerRing) {
     return (
-      <CurvedText fontColor={segment.color} text={segment.label} offset={TECHNOLOGY_RADAR} radius={outerRing.radius + 10} radianToStart={segment.radianToStart} radianToEnd={segment.radianToEnd} />
-    )
+      <CurvedText
+        fontColor={segment.color}
+        text={segment.label}
+        offset={TECHNOLOGY_RADAR}
+        radius={outerRing.radius + 10}
+        radianToStart={segment.radianToStart}
+        radianToEnd={segment.radianToEnd}
+      />
+    );
   }
-}
+};
 
-const TechnologyRadar = ({ entryRadius, entries, rings, segments }) => {
+const Description = ({ entryRadius, description }) => {
+  const descriptions = [description.normal, description.isNew, description.moved];
+
+  return (
+    <g className="description">
+      {descriptions.map(
+        (label, index) => (
+          <g transform={`translate(0, ${(entryRadius * 2 + 10) * index})`} fill={description.color}>
+            <EntryShape
+              radius={entryRadius}
+              isNew={index === 1}
+              moved={index === 2}
+            />
+            <text y={entryRadius / 2} x={entryRadius * 2 + 5}>{label}</text>
+          </g>
+        )
+      )}
+    </g>
+  );
+};
+
+const TechnologyRadar = ({
+  entryRadius,
+  entries,
+  rings,
+  segments,
+  description,
+}) => {
   const radar = segments
     .map(getSegmentConfig.bind(this, entries, rings))
     .map((segment) => (
@@ -110,6 +144,7 @@ const TechnologyRadar = ({ entryRadius, entries, rings, segments }) => {
   return (
     <svg viewBox="-20 -20 1040 1040" xmlns="http://www.w3.org/2000/svg">
       {radar}
+      <Description description={description} entryRadius={entryRadius / 2} />
     </svg>
   );
 };
@@ -141,6 +176,12 @@ TechnologyRadar.propTypes = {
       moved: PropTypes.bool,
     })
   ).isRequired,
+  description: PropTypes.shape({
+    color: PropTypes.string,
+    normal: PropTypes.string.isRequired,
+    isNew: PropTypes.string.isRequired,
+    moved: PropTypes.string.isRequired,
+  }),
 };
 
 TechnologyRadar.defaultProps = {
@@ -157,6 +198,12 @@ TechnologyRadar.defaultProps = {
     { label: "Assess", color: "#CCCCCC" },
     { label: "Hold", color: "#F2F2F2" },
   ],
+  description: {
+    color: "#808184",
+    normal: "No change",
+    isNew: "New",
+    moved: "Moved in/out",
+  },
 };
 
 export default TechnologyRadar;
