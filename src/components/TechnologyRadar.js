@@ -205,6 +205,10 @@ const TechnologyRadar = ({
   segments,
   description,
 }) => {
+  if (segments.length <= 1) {
+    throw Error("The technology radar must have at least two segments");
+  }
+
   const entryRadius = 10;
   const radar = segments
     .map(getSegmentConfig.bind(this, entries, rings))
