@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Ring from "./Ring";
 import { EntryShape } from "./Entry";
-import { CurvedText, getClassName, radianToDegrees } from "./utility";
+import { CurvedText, getClassName } from "./utility";
 
 const DEFAULTS = {
   SEGMENT: {
@@ -148,37 +148,38 @@ const Description = ({ entryRadius, description }) => {
 };
 
 const Segment = ({ segment, entryRadius }) => {
-  const onMouseEnter = (event) => {
+  const onMouseEnter = (seg, event) => {
     event.currentTarget
       .closest("svg")
       .querySelectorAll(".segment")
       .forEach((node) => node.setAttribute("opacity", "0.8"));
     event.currentTarget.setAttribute("opacity", "1");
-    if (typeof segment.onMouseEnter === "function") {
-      segment.onMouseEnter(segment, event);
+    if (typeof seg.onMouseEnter === "function") {
+      seg.onMouseEnter(seg, event);
     }
   };
 
-  const onMouseLeave = (event) => {
+  const onMouseLeave = (seg, event) => {
     event.currentTarget
       .closest("svg")
       .querySelectorAll(".segment")
       .forEach((node) => node.setAttribute("opacity", "1"));
-    if (typeof segment.onMouseLeave === "function") {
-      segment.onMouseLeave(segment, event);
+    if (typeof seg.onMouseLeave === "function") {
+      seg.onMouseLeave(seg, event);
     }
   };
+
+  const onClick = (seg, event) => {
+    if (typeof seg.onClick === "function")
+      seg.onClick(seg, event);
+  }
 
   return (
     <g
       className={getClassName(segment, "segment")}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      onClick={
-        typeof segment.onClick === "function"
-          ? segment.onClick.bind(this, segment)
-          : undefined
-      }
+      onMouseEnter={onMouseEnter.bind(this, segment)}
+      onMouseLeave={onMouseLeave.bind(this, segment)}
+      onClick={onClick.bind(this, segment)}
     >
       {drawSegmentLabel(segment)}
       {segment.rings
@@ -199,12 +200,12 @@ const Segment = ({ segment, entryRadius }) => {
 };
 
 const TechnologyRadar = ({
-  entryRadius,
   entries,
   rings,
   segments,
   description,
 }) => {
+  const entryRadius = 10;
   const radar = segments
     .map(getSegmentConfig.bind(this, entries, rings))
     .map((segment) => <Segment key={segment.label} segment={segment} entryRadius={entryRadius} />);
@@ -212,13 +213,12 @@ const TechnologyRadar = ({
   return (
     <svg viewBox="-20 -20 1040 1040" xmlns="http://www.w3.org/2000/svg">
       {radar}
-      <Description description={description} entryRadius={entryRadius / 2} />
+      <Description description={description} entryRadius={entryRadius} />
     </svg>
   );
 };
 
 TechnologyRadar.propTypes = {
-  entryRadius: PropTypes.number,
   segments: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
@@ -259,7 +259,6 @@ TechnologyRadar.propTypes = {
 };
 
 TechnologyRadar.defaultProps = {
-  entryRadius: 10,
   segments: [
     { label: "Techniques", color: "#3DB5BE" },
     { label: "Tools", color: "#83AD78" },

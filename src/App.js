@@ -24,7 +24,7 @@ function App() {
   }]
   return (
     <div className="App">
-      <TechnologyRadar entries={entries} />
+      <TechnologyRadar segments={[{label: "Languages & Frameworks" }, {label: "Tools"}, {label: "Data"}]} entries={entries} />
     </div>
   );
 }

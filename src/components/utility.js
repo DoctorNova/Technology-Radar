@@ -35,6 +35,17 @@ export function* randomNumberFactory(min, max) {
   }
 }
 
+export const drawArc = (offset, radius, radianToStart, radianToEnd) => {
+  const start = getCartesianCoordinates(radius, radianToEnd, offset);
+  const end = getCartesianCoordinates(radius, radianToStart, offset);
+  const largeArcFlag = radianToEnd - radianToStart <= Math.PI ? "0" : "1";
+
+  return [
+    "M", start.x, start.y,
+    "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
+  ].join(" ");
+}
+
 export const CurvedText = ({
   fontColor,
   text,

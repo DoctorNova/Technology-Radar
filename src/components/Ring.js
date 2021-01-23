@@ -1,18 +1,12 @@
-import { coordinatesToString, getClassName, CurvedText } from "./utility";
+import { coordinatesToString, getClassName, CurvedText, drawArc } from "./utility";
 import PropTypes from "prop-types";
 import Entries from "./Entry";
-import { getBezierCurvePoints, drawBezierCurvePoints } from "./bezierCurve";
 
 const Ring = ({ offset, ring, segment, entryRadius }) => {
-  const bezierCurvePoints = getBezierCurvePoints(
-    offset,
-    ring.radius,
-    segment.radianToStart,
-    segment.radianToEnd
-  );
+  const arc = drawArc(offset, ring.radius, segment.radianToStart, segment.radianToEnd);
 
   const ringD =
-    drawBezierCurvePoints(bezierCurvePoints) +
+    arc +
     " L " +
     coordinatesToString(offset) +
     " Z ";
