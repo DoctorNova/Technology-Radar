@@ -10,7 +10,8 @@ const DEFAULTS = {
     color: "#3DB5BE",
   },
   RING: {
-    color: "#CCCCCC",
+    stroke: "#4F4F4F",
+    color: "#fff",
   },
   ENTRY: {
     isNew: false,

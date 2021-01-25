@@ -14,7 +14,7 @@ const Ring = ({ offset, ring, segment, entryRadius }) => {
   return (
     <g className={getClassName(ring, "ring")} key={ring.label}>
       <title>{ring.label}</title>
-      <path fill={ring.color} d={ringD} />
+      <path stroke={ring.stroke} fill={ring.color} d={ringD} />
       <RingLabel offset={offset} ring={ring} segment={segment} />
       <Entries
         offset={offset}

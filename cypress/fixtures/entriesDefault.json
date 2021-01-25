@@ -1,0 +1,368 @@
+[
+    {
+      "label": "0",
+      "title": "Git",
+      "ring": "Adopt",
+      "segment": "Tools"
+    },
+    {
+      "label": "1",
+      "title": "Jenkins",
+      "ring": "Assess",
+      "segment": "Tools"
+    },
+    {
+      "label": "2",
+      "title": "Netlify",
+      "ring": "Trial",
+      "segment": "Tools"
+    },
+    {
+      "label": "3",
+      "title": "Docker",
+      "ring": "Assess",
+      "segment": "Tools"
+    },
+    {
+      "label": "4",
+      "title": "Tomcat",
+      "ring": "Assess",
+      "segment": "Tools"
+    },
+    {
+      "label": "5",
+      "title": "NodeJS",
+      "ring": "Adopt",
+      "segment": "Tools"
+    },
+    {
+      "label": "6",
+      "title": "JavaScript",
+      "ring": "Adopt",
+      "segment": "Languages"
+    },
+    {
+      "label": "7",
+      "title": "NodeJS",
+      "ring": "Adopt",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "8",
+      "title": "ExpressJS",
+      "ring": "Trial",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "9",
+      "title": "React",
+      "ring": "Adopt",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "10",
+      "title": "Gatsby",
+      "ring": "Trial",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "11",
+      "title": "Netlify CMS",
+      "ring": "Adopt",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "12",
+      "title": "jQuery",
+      "ring": "Adopt",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "13",
+      "title": "Mustache",
+      "ring": "Adopt",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "14",
+      "title": "AngularJS",
+      "ring": "Assess",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "15",
+      "title": "GSAP (GreenSockAnimationPlatfrom)",
+      "ring": "Trial",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "16",
+      "title": "Webpack",
+      "ring": "Trial",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "17",
+      "title": "PHP",
+      "ring": "Assess",
+      "segment": "Languages"
+    },
+    {
+      "label": "18",
+      "title": "Delphi",
+      "ring": "Assess",
+      "segment": "Languages"
+    },
+    {
+      "label": "19",
+      "title": "Go",
+      "ring": "Hold",
+      "segment": "Languages"
+    },
+    {
+      "label": "20",
+      "title": "Python",
+      "ring": "Hold",
+      "segment": "Languages"
+    },
+    {
+      "label": "21",
+      "title": "HTML/CSS",
+      "ring": "Adopt",
+      "segment": "Languages"
+    },
+    {
+      "label": "22",
+      "title": "XML",
+      "ring": "Adopt",
+      "segment": "Languages"
+    },
+    {
+      "label": "23",
+      "title": "SVG",
+      "ring": "Adopt",
+      "segment": "Languages"
+    },
+    {
+      "label": "24",
+      "title": "SASS/SCSS",
+      "ring": "Adopt",
+      "segment": "Languages"
+    },
+    {
+      "label": "25",
+      "title": "Java",
+      "ring": "Adopt",
+      "segment": "Languages"
+    },
+    {
+      "label": "26",
+      "title": "Spring Boot",
+      "ring": "Assess",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "27",
+      "title": "Spring MVC",
+      "ring": "Assess",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "28",
+      "title": "Thymeleaf",
+      "ring": "Assess",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "29",
+      "title": "Jersey",
+      "ring": "Adopt",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "30",
+      "title": "Redux",
+      "ring": "Hold",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "31",
+      "title": "ReasonML",
+      "ring": "Hold",
+      "segment": "Languages"
+    },
+    {
+      "label": "32",
+      "title": "Elixir",
+      "ring": "Hold",
+      "segment": "Languages"
+    },
+    {
+      "label": "33",
+      "title": "Phoenix (Elixir framework)",
+      "ring": "Hold",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "34",
+      "title": "Clojure",
+      "ring": "Hold",
+      "segment": "Languages"
+    },
+    {
+      "label": "35",
+      "title": "Elm",
+      "ring": "Hold",
+      "segment": "Languages"
+    },
+    {
+      "label": "36",
+      "title": "F#",
+      "ring": "Hold",
+      "segment": "Languages"
+    },
+    {
+      "label": "37",
+      "title": "Ember.js",
+      "ring": "Hold",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "38",
+      "title": "VueJS",
+      "ring": "Hold",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "39",
+      "title": "Selenium ",
+      "ring": "Hold",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "40",
+      "title": "Jest",
+      "ring": "Hold",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "41",
+      "title": "Django",
+      "ring": "Hold",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "42",
+      "title": "Flask",
+      "ring": "Hold",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "43",
+      "title": "React Native",
+      "ring": "Hold",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "44",
+      "title": "Kotline",
+      "ring": "Hold",
+      "segment": "Languages"
+    },
+    {
+      "label": "45",
+      "title": "C#",
+      "ring": "Hold",
+      "segment": "Languages"
+    },
+    {
+      "label": "46",
+      "title": "Next.js (React framework)",
+      "ring": "Hold",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "47",
+      "title": "Nuxt.js (Vue framework)",
+      "ring": "Hold",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "48",
+      "title": "Emmet Abbreviations",
+      "ring": "Hold",
+      "segment": "Languages"
+    },
+    {
+      "label": "49",
+      "title": "Cypress",
+      "ring": "Hold",
+      "segment": "Frameworks"
+    },
+    {
+      "label": "50",
+      "title": "MySQL",
+      "ring": "Adopt",
+      "segment": "Data Management"
+    },
+    {
+      "label": "51",
+      "title": "MongoDB",
+      "ring": "Hold",
+      "segment": "Data Management"
+    },
+    {
+      "label": "52",
+      "title": "Apache Solr",
+      "ring": "Adopt",
+      "segment": "Data Management"
+    },
+    {
+      "label": "53",
+      "title": "PostgreSQL",
+      "ring": "Adopt",
+      "segment": "Data Management"
+    },
+    {
+      "label": "54",
+      "title": "Flux (Application architecture for building user interfaces)",
+      "ring": "Hold",
+      "segment": "Other Topics"
+    },
+    {
+      "label": "55",
+      "title": "REST",
+      "ring": "Adopt",
+      "segment": "Other Topics"
+    },
+    {
+      "label": "56",
+      "title": "MVC",
+      "ring": "Adopt",
+      "segment": "Other Topics"
+    },
+    {
+      "label": "57",
+      "title": "Adobe Illustrator",
+      "ring": "Trial",
+      "segment": "Other Topics"
+    },
+    {
+      "label": "58",
+      "title": "Adobe Photoshop",
+      "ring": "Hold",
+      "segment": "Other Topics"
+    },
+    {
+      "label": "59",
+      "title": "Webdesign fundametals",
+      "ring": "Hold",
+      "segment": "Other Topics"
+    },
+    {
+      "label": "60",
+      "title": "GraphQL",
+      "ring": "Trial",
+      "segment": "Other Topics"
+    }
+  ]
