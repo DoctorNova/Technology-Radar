@@ -3,7 +3,6 @@ import React from "react";
 import { mount, unmount } from "@cypress/react";
 import TechnologyRadar from "./TechnologyRadar";
 import entries from "../../cypress/fixtures/entries.json";
-import entriesWithDefaults from "../../cypress/fixtures/entriesDefault.json";
 
 describe("Test Technology Radar Segments", () => {
   beforeEach(() => {
@@ -140,20 +139,4 @@ describe("Test Technology Radar Entries", () => {
 
     cy.get(".entry").should("have.length", entries.length);
   });
-
-  it("Test entries with default rings", () => {
-    const segments = [
-      { label: "Languages", color: "#8D2145" },
-      { label: "Frameworks", color: "#8D2145" },
-      { label: "Data Management", color: "#3DB5BE" },
-      { label: "Tools", color: "#83AD78" },
-      { label: "Other Topics", color: "#E88744" },
-    ];
-
-    mount(
-      <TechnologyRadar segments={segments} entries={entriesWithDefaults} />
-    );
-
-    cy.get(".entry").should("have.length", entries.length);
-  })
 });
